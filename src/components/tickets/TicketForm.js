@@ -47,7 +47,7 @@ class TicketForm extends React.Component {
         const employee = this.state.employees.find(empl => empl._id === id)
         if (employee) {
             this.setState(prevState => {
-                const selectedEmployees = [].concat(prevState.selectedEmployees, employee._id)
+                const selectedEmployees = [].concat(prevState.selectedEmployees, employee)
                 return {
                     selectedEmployees
                 }
@@ -81,26 +81,33 @@ class TicketForm extends React.Component {
         return (
             <div className = "container">
                 <form onSubmit = { this.handleSubmit }>
-                    <label htmlFor="codeNo">Code Number</label><br/>
-                    <input type="text" name="codeNo" id="codeNo" value={ this.state.codeNo } onChange = { this.handleChange }/><br/>
-                    <label htmlFor="customer">Customer</label><br/>
-                    <select id="customer" onChange = { this.handleSelect }>
-                        <option value = "select">Select</option>
-                        {
-                            this.state.customers.map(customer => {
-                                return <option key = { customer._id } name = "customer" value = { customer._id }>{ customer.name }</option>
-                            })
-                        }
-                    </select><br/>
-                    <label htmlFor="department">Department</label><br/>
-                    <select id = "department" onChange = { this.handleSelect }>
-                        <option value = "select">Select</option>
-                        {
-                            this.state.departments.map(department => {
-                                return <option key = { department._id } value = { department._id }>{ department.name }</option>
-                            })
-                        }
-                    </select><br/>
+                    <div className ="form-group">
+                        <label htmlFor="codeNo">Code Number</label><br/>
+                        <input type="text" className="form-control" name="codeNo" id="codeNo" value={ this.state.codeNo } onChange = { this.handleChange }/>
+                    </div>
+                    <div className ="form-group">
+                        <label htmlFor="customer">Customer</label><br/>
+                        <select id="customer" className = "form-control" onChange = { this.handleSelect }>
+                            <option value = "select">Select</option>
+                            {
+                                this.state.customers.map(customer => {
+                                    return <option key = { customer._id }  name = "customer" value = { customer._id }>{ customer.name }</option>
+                                })
+                            }
+                        </select>
+                    </div>
+                    <div className = "form-group">
+                        <label htmlFor="department">Department</label><br/>
+                        <select id = "department" className ="form-control" onChange = { this.handleSelect }>
+                            <option value = "select">Select</option>
+                            {
+                                this.state.departments.map(department => {
+                                    return <option key = { department._id } value = { department._id }>{ department.name }</option>
+                                })
+                            }
+                        </select>
+                    </div>
+                   
                     <label htmlFor="employee">Employees</label><br/>
                     <ul>
                         {
@@ -109,15 +116,19 @@ class TicketForm extends React.Component {
                             })
                         }
                     </ul>
-                    <br/>
-                    <label htmlFor="message">Message</label><br/>
-                    <textarea  id = "message" onChange = { this.handleChange } name = "message" value = { this.state.message } cols="70" rows="4"></textarea><br/>
-                    <label htmlFor="priority">Priority :</label><br/>
-                        <input type="radio" name="priority" value="High" onChange = { this.handleChange }/>High<br/>
-                        <input type="radio" name="priority" value="Medium" onChange = { this.handleChange }/>Medium<br/>
-                        <input type="radio" name="priority" value="Low" onChange = { this.handleChange }/>Low<br/>
-                    <input type="submit" name="" value="Submit"/>
+                    <div className = "form-group">
+                        <label htmlFor="message">Message</label><br/>
+                        <textarea  id = "message" className = "form-control" onChange = { this.handleChange } name = "message" value = { this.state.message } cols="70" rows="4"></textarea>
+                    </div>
+                    <div className = "radio">
+                        <label htmlFor="priority">Priority :</label><br/>
+                            <input type="radio" name="priority" value="High" onChange = { this.handleChange }/>High<br/>
+                            <input type="radio" name="priority" value="Medium" onChange = { this.handleChange }/>Medium<br/>
+                            <input type="radio" name="priority" value="Low" onChange = { this.handleChange }/>Low<br/>
+                        </div>
+                    <button type="submit" className = "btn btn-primary">Submit</button>
                 </form>
+                <hr/>
             </div>
         )
     }

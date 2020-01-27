@@ -33,7 +33,7 @@ class Tables extends React.Component {
                                         <td>{ ticket.code }</td>
                                         <td>{ ticket.customer.name }</td>
                                         <td>{ ticket.department.name }</td>
-                                        <td>{ ticket.employees[0].name }</td>
+                                        <td>{ ticket.employees.map(empl => empl.name + " ") }</td>
                                         <td>{ ticket.isResolved === false ? <p>Incomplete</p> : <p>Completed</p> }</td>
                                         <td>{ ticket.message }</td>
                                         <td>{ ticket.priority }</td>

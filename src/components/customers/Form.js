@@ -26,15 +26,21 @@ class Form extends React.Component {
 
     render () {
         return (
-            <div>
+            <div className = "container">
                 <form onSubmit = { this.handleSubmit }>
-                    <label htmlFor="name">Name</label>
-                    <input type="text" name="name" value={ this.state.name } onChange = { this.handleChange } id = "name"/><br/>
-                    <label htmlFor="email">Email</label>
-                    <input type="text" name="email" value={ this.state.email } onChange = { this.handleChange } id = "email"/><br/>
-                    <label htmlFor="mobile">Mobile</label>
-                    <input type="text" name="mobile" value={ this.state.mobile } onChange = { this.handleChange } id = "mobile"/><br/>
-                    <input type="submit" name="" value="add"/>
+                    <div className = "form-group">
+                        <label htmlFor="name">Name</label>
+                        <input type="text" className = "form-control" name="name" value={ this.state.name } onChange = { this.handleChange } id = "name"/>
+                    </div>
+                    <div className = "form-group">
+                        <label htmlFor="email">Email</label>
+                        <input type="text" className = "form-control" name="email" value={ this.state.email } onChange = { this.handleChange } id = "email"/>
+                    </div>
+                    <div className = "form-group">
+                        <label htmlFor="mobile">Mobile</label>
+                        <input type="text" className = "form-control" name="mobile" value={ this.state.mobile } onChange = { this.handleChange } id = "mobile"/>
+                    </div>
+                    <button type="submit" className = "btn btn-primary">Add</button>
                 </form>
             </div>
         )
