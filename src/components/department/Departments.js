@@ -69,10 +69,10 @@ class Departments extends React.Component {
                 <ul className="list-group">
                     {
                         this.state.departments.map(dept => {
-                            return <li className ="list-group-item" key = { dept._id }>{ dept._id }-{ dept.name } <Link to ={`/departments/${ dept._id }`} >Show  |</Link><Link to = "/departments"  onClick = {() => { this.handleRemove(dept)} }>  Remove</Link></li>
+                            return <li className ="list-group-item" key = { dept._id }>{ dept.name } <Link to ={`/departments/${ dept._id }`} >Show  |</Link><Link to = "/departments"  onClick = {() => { this.handleRemove(dept)} }>  Remove</Link></li>
                         })
                     }
-                </ul>
+                </ul><hr/>
                 <DepartmentForm handleSubmit = { this.handleSubmit } />
             </div>
         )
