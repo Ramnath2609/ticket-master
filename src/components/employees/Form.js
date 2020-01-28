@@ -51,26 +51,36 @@ class EmployeeForm extends React.Component {
 
     render () {
         return (
-            <div>
+            <div className = "container">
                  <h2>Add an employee</h2>
                 <form onSubmit = { this.handleSubmit }>
-                    <label htmlFor="id">id</label>
-                    <input type="tetx" name="empId" id="id" value={ this.state.empId } onChange = { this.handleChange }/><br/>
-                    <label htmlFor="name">name</label>
-                    <input type="text" name="name" value={ this.state.name } onChange = { this.handleChange }/><br/>
-                    <label htmlFor="email">email</label>
-                    <input type="text" name="email" id="email" value = { this.state.email } onChange = { this.handleChange } /><br/>
-                    <label htmlFor="mobile">mobile</label>
-                    <input type="text" name="mobile" id = "mobile" value = { this.state.mobile } onChange = { this.handleChange } /><br/>
-                    <select onChange = { this.handleSelect }>
-                        <option value="select">Select</option>
-                        {
-                            this.state.departments.map(dept => {
-                                return <option key = { dept._id} value ={ dept.name }>{ dept.name }</option> 
-                            }
-                        )}
-                    </select>
-                    <input type="submit" name="" value="Submit"/>
+                    <div className = "form-group">
+                        <label htmlFor="id">id</label>
+                        <input type="tetx" name="empId" className = "form-control" id="id" value={ this.state.empId } onChange = { this.handleChange }/>
+                    </div>
+                    <div className = "form-group">
+                        <label htmlFor="name">name</label>
+                        <input type="text" name="name" className = "form-control" value={ this.state.name } onChange = { this.handleChange }/>
+                    </div>
+                    <div className = "form-group">
+                        <label htmlFor="email">email</label>
+                        <input type="text" name="email" className = "form-control" id="email" value = { this.state.email } onChange = { this.handleChange } />
+                    </div>
+                    <div className = "form-group">
+                        <label htmlFor="mobile">mobile</label>
+                        <input type="text" name="mobile" className = "form-control" id = "mobile" value = { this.state.mobile } onChange = { this.handleChange } />
+                    </div>
+                    <div className = "form-group">
+                        <select onChange = { this.handleSelect } className = "form-control">
+                            <option value="select">Select</option>
+                            {
+                                this.state.departments.map(dept => {
+                                    return <option key = { dept._id} value ={ dept.name }>{ dept.name }</option> 
+                                }
+                            )}
+                        </select>
+                    </div>
+                    <button type="submit" className = "btn btn-primary">submit</button>
                 </form>
             </div>
         )

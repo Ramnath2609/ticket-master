@@ -26,7 +26,6 @@ class EmployeesEdit extends React.Component {
     handleSubmit = (formData) => {
         axios.put(`/employees/${this.state.employee._id}`, formData)
         .then(response => {
-            //console.log(response.data)
             if (response.data) {
                 this.props.history.push(`/employees/${response.data._id}`)
             } else {
