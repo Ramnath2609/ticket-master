@@ -13,7 +13,7 @@ class Tables extends React.Component {
         console.log('within table render', this.props.tickets)
         return (
             <div className = "container">
-                 <table className = "table table-hover">
+                 <table className = "table table-dark table-hover">
                     <thead>
                         <tr>
                             <th>code no</th>
