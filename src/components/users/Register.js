@@ -1,5 +1,6 @@
-import React, {Component } from 'react'
+import React from 'react'
 import axios from 'axios'
+import { Form, FormGroup, Button, Input } from 'reactstrap'
 
 class Register extends React.Component {
     constructor () {
@@ -37,17 +38,27 @@ class Register extends React.Component {
 
     render () {
         return (
-            <div>
-                <h2>Register with us</h2>
-                <form onSubmit = { this.handleSubmit }>
-                    <label htmlFor="username">username</label>
-                    <input type="text" name="username" id = "username"  value= { this.state.username } onChange = { this.handleChange }/><br/>
-                    <label htmlFor="email">email</label>
-                    <input type="text" name="email" id="email" value={ this.state.email } onChange = { this.handleChange } /><br/>
-                    <label htmlFor="password">password</label>
-                    <input type="password" name="password" id="password" value={ this.state.password } onChange = { this.handleChange } /><br/>
-                    <input type="submit" name="" value="Register"/>
-                </form>
+            <div className = "container">
+                <div className = "row">
+                    <div className = "offset-md-4 col-md-4">
+                    <h2>Register with us</h2>
+                        <Form onSubmit = { this.handleSubmit }>
+                            <FormGroup>
+                                <label htmlFor="username">username</label>
+                                <Input type="text" name="username" id = "username"  value= { this.state.username } onChange = { this.handleChange }/>
+                            </FormGroup>
+                            <FormGroup>
+                                <label htmlFor="email">email</label>
+                                <Input type="text" name="email" id="email" value={ this.state.email } onChange = { this.handleChange } />
+                            </FormGroup>
+                            <FormGroup>
+                                <label htmlFor="password">password</label>
+                                <Input type="password" name="password" id="password" value={ this.state.password } onChange = { this.handleChange } />
+                            </FormGroup>
+                            <Button color = "primary">Submit</Button>
+                        </Form>
+                    </div>
+                </div>
             </div>
         )
     }

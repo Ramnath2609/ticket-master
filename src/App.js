@@ -18,7 +18,7 @@ import TicketEdit from './components/tickets/TicketEdit'
 import DepartmentShow from './components/department/DepartmentShow'
 import CustomerEdit from './components/customers/Edit'
 import DepartmentEdit from './components/department/DepartmentEdit'
-
+import { Navbar, NavbarBrand, NavbarText, Nav, NavItem } from 'reactstrap'
 
 function App (props) {
   const handleLogout = () => {
@@ -30,17 +30,35 @@ function App (props) {
     <BrowserRouter>
         <div>
           <span>
-           <h1>Ticket master</h1>
-           
            {
              localStorage.getItem("authToken") ? (
-               <div style = {{textAlign:'right'}}>
-                  <Link to = "/">Home |</Link>
-                  <Link to = "/account/logout" onClick = { handleLogout }> Logout |</Link>
-                  <Link to = "/customers"> Customers |</Link>
-                  <Link to = "/departments"> Departments |</Link>
-                  <Link to = "/employees"> Employees  |</Link>
-                  <Link to = "/tickets"> Tickets  |</Link>
+               <div>
+                <div>
+                    <Navbar color="light" light expand = "md">
+                      <NavbarBrand href="/">Ticket Master</NavbarBrand>
+                        <Nav className="mr-auto" navbar>
+                          <NavItem>
+                              <Link to = "/">Home</Link>&nbsp;
+                          </NavItem>
+                          <NavItem>
+                              <Link to = "/account/logout" onClick = { handleLogout }>Logout</Link>&nbsp;
+                          </NavItem>
+                          <NavItem>
+                              <Link to = "/customers">Customers</Link>&nbsp;
+                          </NavItem>
+                          <NavItem>
+                              <Link to = "/departments">Departments</Link>&nbsp;
+                          </NavItem>
+                          <NavItem>
+                              <Link to = "/employees">Employees</Link>&nbsp;
+                          </NavItem>
+                          <NavItem>
+                              <Link to = "/tickets">Tickets</Link>&nbsp;
+                          </NavItem>
+                        </Nav>
+                        </Navbar>
+                  </div>
+                  
                 </div>
                 
               

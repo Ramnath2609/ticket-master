@@ -9,6 +9,7 @@ class TicketsList extends React.Component {
         this.state = {
             tickets : [],
             employees : [],
+            resolvedTickets : [],
             customers : [],
             departments : []
         }
@@ -24,6 +25,7 @@ class TicketsList extends React.Component {
         Promise.all([req1, req2, req3, req4])
             .then(responses => {
                 const tickets = responses[0].data
+                const resolvedTickets = tickets.filter(ticket => ticket.isResolved)
                 const customers = responses[1].data
                 const employees = responses[2].data
                 const departments = responses[3].data
@@ -36,10 +38,23 @@ class TicketsList extends React.Component {
                     })
                 })
 
-                this.setState({ tickets, employees, customers, departments})
+                this.setState({ tickets, employees, customers, departments, resolvedTickets})
             })
     }
 
+    handleResolve = (ticket) => {
+        
+        axios.delete(`/tickets/${ticket._id}`)
+            .then(response => {
+                const tickets = response.data
+                this.setState(prevState => {
+                    const resolvedTickets = prevState.resolvedTickets.push(ticket)
+                    return {
+                        tickets, resolvedTickets
+                    }
+                })
+            })
+    }
     
 
     handleClick = (id) => {
@@ -59,11 +74,25 @@ class TicketsList extends React.Component {
 
     render () {
         console.log('within tickets render', this.state.tickets.length)
+        let resolved
+        if(this.state.tickets.length !==0) {
+             resolved = (100 / this.state.tickets.length) * this.state.resolvedTickets.length
+        }
+        
+        //console.log(resolved)
         return (
             <div className = "container">
                 <h2>Tickets</h2>
-                { this.state.tickets.length !== 0 &&  <Tables tickets = { this.state.tickets } handleClick = { this.handleClick }/> }
+                { this.state.tickets.length !== 0 &&  <Tables tickets = { this.state.tickets } handleClick = { this.handleClick } handleResolve = { this.handleResolve }/> }
                 <Link to = "/tickets/new">Add ticket</Link>
+                { this.state.resolvedTickets.length !== 0 &&
+                <div className="progress">
+                    <div className="progress-bar progress-bar-success" role="progressbar" aria-valuenow='3'
+                    aria-valuemin="0" aria-valuemax={ this.state.tickets.length } style={{width : `${resolved}%`}}>
+                        {`${100 - resolved}% complete`}
+                    </div>
+                </div>
+                }
             </div>
         )
     }

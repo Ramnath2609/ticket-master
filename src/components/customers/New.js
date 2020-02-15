@@ -1,6 +1,7 @@
 import React from 'react'
 import axios from '../../config/axios'
 import Form from './Form'
+import Swal from "sweetalert2"
 
 class CustomerNew extends React.Component {
 
@@ -14,8 +15,10 @@ class CustomerNew extends React.Component {
             console.log(response.data)
             if ( response.data._id ) {
                 this.props.history.push("/customers")
+                Swal.fire('Good job', 'Customer has been created !', 'success')
             } else {
-                alert (response.data.message)
+                //alert (response.data.message)
+                Swal.fire('Oops', 'Something went wrong', 'error')
             }
         })
     }

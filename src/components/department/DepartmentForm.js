@@ -1,4 +1,5 @@
 import React from 'react'
+import { FormGroup, Form, Button, Input } from 'reactstrap'
 
 class DepartmentForm extends React.Component {
     constructor (props) {
@@ -21,14 +22,16 @@ class DepartmentForm extends React.Component {
 
     render () {
         return (
-            <div>
-                <form onSubmit = { this.handleSubmit }>
-                    <div className = "form-group">
-                        <input type="text" className = "form-control" name="name" value={ this.state.name} onChange = {this.handleChange}/>
-                    </div>
-                    <button type="submit" className = "btn btn-primary">ADD</button>
-                </form>
-
+            <div className = "offset-md-2 col-md-4">
+                <br/>
+                <h3>Add a new department</h3>
+                <br/>
+                <Form onSubmit = { this.handleSubmit }>
+                    <FormGroup>
+                        <Input type="text" className = "form-control" name="name" value={ this.state.name} onChange = {this.handleChange}/>
+                    </FormGroup>
+                    <Button color="primary">Add</Button>
+                </Form>
             </div>
         )
     }
