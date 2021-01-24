@@ -52,7 +52,6 @@ class TicketsList extends React.Component {
     }
 
     handleResolve = (ticket) => {
-        
         axios.delete(`/tickets/${ticket._id}`)
             .then(response => {
                 const tickets = response.data

@@ -30,7 +30,17 @@ function Tables (props) {
                               <td>{ empl.email }</td>
                               <td>{ empl.mobile }</td>
                               <td>{ empl.department.name }</td>
-                              <td><Link to ={`/employees/${empl._id}`}>Show  |</Link><Link to ="/employees" onClick = {()=>{ handleRemove(empl._id) }}>  Remove</Link></td>
+                              <td>
+                                <ul className="action-btns">
+                                    <li className="show-btn">
+                                        <Link to ={`/employees/${empl._id}`}>Show</Link>
+                                    </li>
+                                    <li className="remove-btn">
+                                        <Link to ="/employees" onClick={()=>{ handleRemove(empl._id)}}>  Remove</Link>
+                                    </li>
+                                </ul>
+                              </td>
+                              <td></td>
                            </tr>
                 })
             }
