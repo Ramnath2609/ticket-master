@@ -1,6 +1,7 @@
 import React from 'react'
+import { Form, FormGroup, Input, Button } from 'reactstrap'
 
-class Form extends React.Component {
+class CustomerForm extends React.Component {
     constructor (props) {
         super (props)
         this.state = {
@@ -27,24 +28,28 @@ class Form extends React.Component {
     render () {
         return (
             <div className = "container">
-                <form onSubmit = { this.handleSubmit }>
-                    <div className = "form-group">
-                        <label htmlFor="name">Name</label>
-                        <input type="text" className = "form-control" name="name" value={ this.state.name } onChange = { this.handleChange } id = "name"/>
-                    </div>
-                    <div className = "form-group">
-                        <label htmlFor="email">Email</label>
-                        <input type="text" className = "form-control" name="email" value={ this.state.email } onChange = { this.handleChange } id = "email"/>
-                    </div>
-                    <div className = "form-group">
-                        <label htmlFor="mobile">Mobile</label>
-                        <input type="text" className = "form-control" name="mobile" value={ this.state.mobile } onChange = { this.handleChange } id = "mobile"/>
-                    </div>
-                    <button type="submit" className = "btn btn-primary">Add</button>
-                </form>
+                <div className="row login-row">
+                    <Form onSubmit = { this.handleSubmit }>
+                        <FormGroup>
+                            <label htmlFor="name">Name</label>
+                            <Input type="text" className = "form-control" name="name" value={ this.state.name } onChange = { this.handleChange } id = "name"/>
+                        </FormGroup>
+                        <FormGroup>
+                            <label htmlFor="email">Email</label>
+                            <Input type="text" className = "form-control" name="email" value={ this.state.email } onChange = { this.handleChange } id = "email"/>
+                        </FormGroup>
+                        <FormGroup>
+                            <label htmlFor="mobile">Mobile</label>
+                            <Input type="text" className = "form-control" name="mobile" value={ this.state.mobile } onChange = { this.handleChange } id = "mobile"/>
+                        </FormGroup>
+                        <FormGroup className="submit-btn">
+                            <Button type="submit" className = "btn btn-primary">Add</Button>
+                        </FormGroup>
+                    </Form>
+                </div>
             </div>
         )
     }
 }
 
-export default Form
+export default CustomerForm

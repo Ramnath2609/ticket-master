@@ -8,7 +8,6 @@ import CustomerNew from './components/customers/New'
 import CustomerShow from './components/customers/Show'
 import Departments from './components/department/Departments'
 import EmployeeList from './components/employees/Employees'
-import EmployeeNew from './components/employees/New'
 import EmployeeEdit from './components/employees/Edit'
 import EmployeeShow from './components/employees/Show'
 import TicketsList from './components/tickets/Tickets'
@@ -38,22 +37,22 @@ function App (props) {
                       <NavbarBrand href="/">Ticket Master</NavbarBrand>
                         <Nav className="mr-auto" navbar>
                           <NavItem>
-                              <Link to = "/">Home</Link>&nbsp;
+                              <Link className="nav-links" to = "/">Home</Link>&nbsp;
                           </NavItem>
                           <NavItem>
-                              <Link to = "/account/logout" onClick = { handleLogout }>Logout</Link>&nbsp;
+                              <Link className="nav-links" to = "/account/logout" onClick = { handleLogout }>Logout</Link>&nbsp;
                           </NavItem>
                           <NavItem>
-                              <Link to = "/customers">Customers</Link>&nbsp;
+                              <Link className="nav-links" to = "/customers">Customers</Link>&nbsp;
                           </NavItem>
                           <NavItem>
-                              <Link to = "/departments">Departments</Link>&nbsp;
+                              <Link className="nav-links" to = "/departments">Departments</Link>&nbsp;
                           </NavItem>
                           <NavItem>
-                              <Link to = "/employees">Employees</Link>&nbsp;
+                              <Link className="nav-links" to = "/employees">Employees</Link>&nbsp;
                           </NavItem>
                           <NavItem>
-                              <Link to = "/tickets">Tickets</Link>&nbsp;
+                              <Link className="nav-links" to = "/tickets">Tickets</Link>&nbsp;
                           </NavItem>
                         </Nav>
                         </Navbar>
@@ -64,11 +63,23 @@ function App (props) {
               
              ) : (
                <div>
-                 <Link to = "/">Home |</Link>
-                 <Link to = "/account/register">Register</Link>
-                 <Link to = "/account/login">Login</Link>
+                 <div>
+                    <Navbar color="light" light expand = "md">
+                      <NavbarBrand href="/">Ticket Master</NavbarBrand>
+                        <Nav className="mr-auto" navbar>
+                          <NavItem>
+                            <Link className="nav-links" to = "/">Home</Link>
+                          </NavItem>
+                          <NavItem>
+                            <Link className="nav-links" to = "/account/register">Register</Link>
+                          </NavItem>
+                          <NavItem>
+                            <Link className="nav-links" to = "/account/login">Login</Link>
+                          </NavItem>
+                        </Nav>
+                        </Navbar>
+                  </div>
                </div>
-               
              )
            } 
            </span>
@@ -90,7 +101,6 @@ function App (props) {
               
               
               <Route exact path = "/employees" component = { EmployeeList } />
-              <Route path = "/employees/new" component = { EmployeeNew } />
               <Route path = "/employees/edit/:id" component = { EmployeeEdit } />
               <Route path = "/employees/:id" component = { EmployeeShow } />
               

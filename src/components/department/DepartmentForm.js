@@ -30,7 +30,9 @@ class DepartmentForm extends React.Component {
                     <FormGroup>
                         <Input type="text" className = "form-control" name="name" value={ this.state.name} onChange = {this.handleChange}/>
                     </FormGroup>
-                    <Button color="primary">Add</Button>
+                    <FormGroup className="submit-btn">
+                        <Button color="primary">Add</Button>
+                    </FormGroup>
                 </Form>
             </div>
         )

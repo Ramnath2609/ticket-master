@@ -1,11 +1,12 @@
-import React , {Component} from 'react'
-import AddDepartment from './AddDepartment'
+import React from 'react'
+import HomeImage from "./assets/image/ticket-master.png"
 
 function Home (props) {
     return (
         <div>
-            <h2>Welcome to ticket master app</h2>
-            { localStorage.getItem('authToken') && <AddDepartment /> }
+            <div className="container home-image">
+                <img src={HomeImage} />
+            </div>
         </div>
     )
 }

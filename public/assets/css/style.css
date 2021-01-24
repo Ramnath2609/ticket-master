@@ -1,0 +1,115 @@
+body {
+    background-color: #ecf0f1;
+}
+
+.btn {
+    background-color: #0984e3;
+    border-width: 0;
+    border-radius: 20px;
+    padding: 7px 15px;
+}
+
+.form-control {
+    border-top: none;
+    border-left: none;
+    border-right: none;
+}
+
+.form-control:focus {
+    box-shadow: none;
+}
+
+label {
+    text-transform: capitalize;
+}
+
+.submit-btn {
+    text-align: center;
+}
+
+.select-option {
+    border: 1px solid #6c757d;
+}
+
+.add-btn {
+    text-align: center;
+}
+
+.bg-light {
+    background-color: #0062cc !important;
+    color: white;
+}
+
+
+.navbar-light .navbar-brand {
+    color: white;
+}
+
+.home-image {
+    text-align: center;
+}
+
+.nav-links {
+    color: white;
+    text-decoration: none;
+    transition: 0.2s ease;
+}
+
+.nav-item{
+    padding: 5px;
+    transition: 0.2s ease-in;
+}
+
+.navbar {
+    padding: 10px;
+}
+
+.nav-item:hover > .nav-links{
+    color: #0062cc;
+    text-decoration: none;
+}
+
+.nav-item:hover {
+    background-color: white;
+    border-radius: 5px;
+}
+.mr-auto {
+    margin-left: auto !important;
+    margin-right: 0 !important;
+}
+
+.container {
+    height: 100vh;
+}
+
+.login-title {
+    text-align: center;
+}
+
+.login-form {
+    padding: 20px;
+}
+
+.table {
+    background-color: white;
+    border-radius: 5px;
+}
+
+thead {
+    text-transform: capitalize !important;
+}
+
+.login-row {
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.login-container {
+    margin: 20px;
+    padding: 20px;
+    background-color: white;
+    border: 1px solid #b2bec3;
+    box-shadow: 0px 2px 9px;
+    border-radius: 10px;
+}

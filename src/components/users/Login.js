@@ -38,10 +38,10 @@ class Login extends React.Component {
     render () {
         return (
             <div className = "container">
-                <div className = "row">
-                    <div className = "offset-md-4 col-md-4">
-                    <h2>Login</h2>
-                        <Form onSubmit = { this.handleSubmit }>
+                <div className = "row login-row">
+                    <div className = "offset-md-4 col-md-4 login-container">
+                    <h2 className="login-title">Login</h2>
+                        <Form className="login-form" onSubmit = { this.handleSubmit }>
                             <FormGroup>
                                 <label htmlFor="email">email</label>
                                 <Input type="text" name="email" id="email"value= { this.state.email } onChange = { this.handleChange }/>
@@ -50,7 +50,9 @@ class Login extends React.Component {
                                 <label htmlFor="password">password</label>
                                 <Input type="password" name="password" id = "password" value={ this.state.password } onChange = { this.handleChange }/>
                             </FormGroup>
-                            <Button color = "primary">Submit</Button>
+                            <FormGroup className="submit-btn">
+                                <Button color = "primary">Submit</Button>
+                            </FormGroup>
                         </Form>
                     </div>
                 </div>

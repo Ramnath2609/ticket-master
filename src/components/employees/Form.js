@@ -1,6 +1,6 @@
 import React from 'react'
 import axios from '../../config/axios'
-import { Form, FormGroup, Input, Button, DropdownMenu, DropdownItem } from 'reactstrap'
+import { Form, FormGroup, Input, Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap'
 
 class EmployeeForm extends React.Component {
     constructor (props) {
@@ -11,7 +11,8 @@ class EmployeeForm extends React.Component {
             email : props.email ? props.email : '',
             mobile : props.mobile ? props.mobile : '',
             department : '',
-            departments : []
+            departments : [],
+            show: false
         }
     }
 
@@ -55,26 +56,26 @@ class EmployeeForm extends React.Component {
             <div className = "container">
                 <div className = "row">
                     <div className = "offset-md-3 col-md-6">
-                    <h2>Add an employee</h2>
+                    <Modal isOpen={this.props.modal} toggle={this.props.toggle} >
+                        <ModalHeader toggle={this.props.toggle} >
+                        Add an employee
+                        </ModalHeader>
+                        <ModalBody>
                         <Form onSubmit = { this.handleSubmit }>
                             <FormGroup>
-                                <label htmlFor="id">id</label>
-                                <Input type="tetx" name="empId" className = "form-control" id="id" value={ this.state.empId } onChange = { this.handleChange }/>
+                                <Input type="tetx" placeholder="Id" name="empId" className = "form-control" id="id" value={ this.state.empId } onChange = { this.handleChange }/>
                             </FormGroup>
                             <FormGroup>
-                                <label htmlFor="name">name</label>
-                                <Input type="text" name="name" className = "form-control" value={ this.state.name } onChange = { this.handleChange }/>
+                                <Input type="text" placeholder="Name" name="name" className = "form-control" value={ this.state.name } onChange = { this.handleChange }/>
                             </FormGroup>
                             <FormGroup>
-                                <label htmlFor="email">email</label>
-                                <Input type="text" name="email" className = "form-control" id="email" value = { this.state.email } onChange = { this.handleChange } />
+                                <Input type="text" placeholder="Email" name="email" className = "form-control" id="email" value = { this.state.email } onChange = { this.handleChange } />
                             </FormGroup>
                             <FormGroup>
-                                <label htmlFor="mobile">mobile</label>
-                                <Input type="text" name="mobile" className = "form-control" id = "mobile" value = { this.state.mobile } onChange = { this.handleChange } />
+                                <Input type="text" placeholder="Mobile" name="mobile" className = "form-control" id = "mobile" value = { this.state.mobile } onChange = { this.handleChange } />
                             </FormGroup>
-                            <FormGroup>
-                                <select onChange = { this.handleSelect } className = "form-control">
+                            <FormGroup className="select-option">
+                                <select  onChange = { this.handleSelect } className = "form-control">
                                     <option value="select">Select</option>
                                     {
                                         this.state.departments.map(dept => {
@@ -83,8 +84,14 @@ class EmployeeForm extends React.Component {
                                     )}
                                 </select>
                             </FormGroup>
-                            <Button color = "primary">Submit</Button>
+                            <FormGroup className="submit-btn">
+                                <Button color = "primary">Submit</Button>
+                            </FormGroup>
                         </Form>
+                        </ModalBody>
+                        <ModalFooter>
+                        </ModalFooter>
+                    </Modal>
                     </div>
                 </div>
                 

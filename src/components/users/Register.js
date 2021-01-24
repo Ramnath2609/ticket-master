@@ -39,9 +39,9 @@ class Register extends React.Component {
     render () {
         return (
             <div className = "container">
-                <div className = "row">
-                    <div className = "offset-md-4 col-md-4">
-                    <h2>Register with us</h2>
+                <div className = "row login-row">
+                    <div className = "offset-md-4 col-md-4 login-container">
+                    <h2 className="login-title">Register with us</h2>
                         <Form onSubmit = { this.handleSubmit }>
                             <FormGroup>
                                 <label htmlFor="username">username</label>
@@ -55,7 +55,9 @@ class Register extends React.Component {
                                 <label htmlFor="password">password</label>
                                 <Input type="password" name="password" id="password" value={ this.state.password } onChange = { this.handleChange } />
                             </FormGroup>
-                            <Button color = "primary">Submit</Button>
+                            <FormGroup className="submit-btn">
+                                <Button color = "primary">Submit</Button>
+                            </FormGroup>
                         </Form>
                     </div>
                 </div>

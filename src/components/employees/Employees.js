@@ -1,14 +1,17 @@
 import React from 'react'
 import axios from '../../config/axios'
-import { Link } from 'react-router-dom'
 import Table from './Tables'
 import Swal from 'sweetalert2'
+import { Button } from 'reactstrap'
+import EmployeeForm from './Form'
+
 
 class EmployeeList extends React.Component {
-    constructor () {
-        super ()
+    constructor (props) {
+        super (props)
         this.state = {
-            employees : [] ,
+            employees : [],
+            show: false
         }
     }
 
@@ -25,6 +28,52 @@ class EmployeeList extends React.Component {
         })
         
     }
+
+    openModal = () => {
+        this.setState({ show: true })
+    }
+
+    toggle = () => {
+        this.setState({
+            show: !this.state.show
+        })
+    }
+
+    handleClose = () => {
+        this.setState({ show: false })
+    }
+
+    handleShow = () => {
+        this.setState({ show: true })
+    }
+
+    handleSubmit = (formData) => {
+            //console.log(formData)
+         axios.post("/employees", formData, {
+            headers : {
+                "x-auth" : localStorage.getItem("authToken")
+            }
+        })
+        .then(response => {
+            if (response.data._id) {
+                Swal.fire(
+                    'Good job!',
+                    'You department has been created!',
+                    'success'
+                  )
+                this.setState({ show: false })
+                window.location.reload()
+                //this.props.history.push("/employees")
+        }
+        })
+        .catch(err => {
+            Swal.fire(
+                'Oops!',
+                'Something went wrong!',
+                'error'
+              )
+        })
+        }
 
     handleRemove = (data) => {
         Swal.fire({
@@ -69,7 +118,10 @@ class EmployeeList extends React.Component {
             <div className = "container">
                 <h2>Listing employees</h2>
                 <Table employees = { this.state.employees } handleRemove = { this.handleRemove }/>
-                <Link to ="/employees/new" >Add new employee</Link>
+                <div className="add-btn">
+                    <Button onClick={() => this.openModal()}>Add a new employee</Button>
+                </div>
+                <EmployeeForm handleSubmit = { this.handleSubmit } toggle={this.toggle} handleShow={this.handleShow} modal={this.state.show} />
             </div>
         )
     }
