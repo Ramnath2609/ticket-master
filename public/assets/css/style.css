@@ -64,9 +64,56 @@ label {
     padding: 10px;
 }
 
+.action-btns{
+    list-style-type: none;
+    display: inline;
+}
+
+input[type=checkbox]{
+    margin: 5px;
+}
+
+.action-btns > li {
+    display: inline;
+    padding: 5px 6px;
+    margin: 3px;
+}
+
+
+.remove-btn{
+    background: red;
+    border-radius: 5px;
+    transition: 0.3s ease;
+}
+
+.remove-btn > a {
+    color: white;
+    text-decoration: none;
+}
+
+.remove-btn:hover{
+    box-shadow: 0px 2px 9px red;
+}
+
+.show-btn{
+    background: #0062cc;
+    border-radius: 5px;
+    transition: 0.3s ease;
+}
+
+.show-btn > a {
+    color: white;
+    text-decoration: none;
+}
+
+.show-btn:hover{
+    box-shadow: 0px 2px 9px #0062cc;
+}
+
 .nav-item:hover > .nav-links{
     color: #0062cc;
     text-decoration: none;
+    cursor: pointer;
 }
 
 .nav-item:hover {
@@ -78,9 +125,9 @@ label {
     margin-right: 0 !important;
 }
 
-.container {
+/* .container {
     height: 100vh;
-}
+} */
 
 .login-title {
     text-align: center;
@@ -90,14 +137,18 @@ label {
     padding: 20px;
 }
 
+/* Table styles */
 .table {
     background-color: white;
     border-radius: 5px;
 }
 
-thead {
+thead, td {
     text-transform: capitalize !important;
+    text-align: center;
 }
+
+/* Table style ends */
 
 .login-row {
     justify-content: center;

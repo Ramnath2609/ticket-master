@@ -17,7 +17,7 @@ class Tables extends React.Component {
         console.log('within table render', this.props.tickets)
         return (
             <div className = "container">
-                 <table className = "table table-dark table-hover">
+                 <table className = "table">
                     <thead>
                         <tr>
                             <th>code no</th>
@@ -40,8 +40,12 @@ class Tables extends React.Component {
                                         <td>{ ticket.employees.map(empl => empl.name + " ") }</td>
                                         <td>{ ticket.message }</td>
                                         <td>{ ticket.priority }</td>
-                                        <td><Link to ={`/tickets/${ ticket._id }`}>Show  |</Link><Link to ="/tickets" onClick = { () => {this.handleClick(ticket._id)} }> Remove</Link></td>
-                                        <td><input type = 'checkbox' checked = { ticket.isResolved} onChange = {() => { this.handleResolve(ticket)}} />completed </td>
+                                        <td>
+                                            <ul className="action-btns">
+                                                <li className="show-btn"><Link  to ={`/tickets/${ ticket._id }`}>Show </Link></li>
+                                                <li className="remove-btn"><Link  to ="/tickets" onClick={ () => {this.handleClick(ticket._id)}}> Remove</Link></li>
+                                            </ul></td>
+                                        <td><input type='checkbox' checked={ticket.isResolved} onChange={() => {this.handleResolve(ticket)}}/>completed </td>
                                     </tr>
                             })
                         }

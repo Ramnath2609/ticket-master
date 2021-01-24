@@ -2,7 +2,8 @@ import React from 'react'
 import axios from '../../config/axios'
 import { Link } from 'react-router-dom'
 import Tables from './Tables'
-
+import TicketChart from "./Chart"
+import {chartColors} from "./colors"
 class TicketsList extends React.Component {
     constructor () {
         super ()
@@ -11,13 +12,21 @@ class TicketsList extends React.Component {
             employees : [],
             resolvedTickets : [],
             customers : [],
-            departments : []
+            departments : [],
+            data: {
+                labels: ["Resolved", "Not resolved"],
+                    datasets: [
+                        {
+                        data: [300, 50],
+                        backgroundColor: chartColors,
+                        hoverBackgroundColor: chartColors
+   
+                    }]
         }
-        console.log("constructor")
     }
+}
 
         componentDidMount () {
-        console.log("component did mount")
         const req1 = axios.get('/tickets')
         const req2 = axios.get('/customers')
         const req3 = axios.get('/employees')
@@ -38,7 +47,7 @@ class TicketsList extends React.Component {
                     })
                 })
 
-                this.setState({ tickets, employees, customers, departments, resolvedTickets})
+                this.setState({ tickets, employees, customers, departments, resolvedTickets })
             })
     }
 
@@ -82,9 +91,18 @@ class TicketsList extends React.Component {
         //console.log(resolved)
         return (
             <div className = "container">
+                <div className="row">
                 <h2>Tickets</h2>
                 { this.state.tickets.length !== 0 &&  <Tables tickets = { this.state.tickets } handleClick = { this.handleClick } handleResolve = { this.handleResolve }/> }
                 <Link to = "/tickets/new">Add ticket</Link>
+                </div>
+                
+                <div className="row">
+                    <h2>Statistics</h2>
+                    <div className="col-8">
+                        {this.state.tickets.length > 0 && <TicketChart data={this.state.data}/>}
+                    </div>
+                </div>
                 { this.state.resolvedTickets.length !== 0 &&
                 <div className="progress">
                     <div className="progress-bar progress-bar-success" role="progressbar" aria-valuenow='3'
