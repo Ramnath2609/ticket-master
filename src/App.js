@@ -17,8 +17,7 @@ import TicketEdit from './components/tickets/TicketEdit'
 import DepartmentShow from './components/department/DepartmentShow'
 import CustomerEdit from './components/customers/Edit'
 import DepartmentEdit from './components/department/DepartmentEdit'
-import { Navbar, NavbarBrand, NavbarText, Nav, NavItem } from 'reactstrap'
-import TicketIcon from "../src/assets/image/ticket.svg"
+import { Navbar, NavbarBrand, Nav, NavItem } from 'reactstrap'
 
 function App (props) {
   const handleLogout = () => {

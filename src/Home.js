@@ -3,9 +3,12 @@ import HomeImage from "./assets/image/ticket-master.png"
 
 function Home (props) {
     return (
-        <div>
+        <div className="home">
             <div className="container home-image">
-                <img src={HomeImage} />
+                <img src={HomeImage} alt="home" />
+            </div>
+            <div className="home-text">
+                <h1>Welcome to the Ticket Master application</h1>
             </div>
         </div>
     )

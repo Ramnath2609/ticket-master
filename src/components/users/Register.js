@@ -38,7 +38,7 @@ class Register extends React.Component {
 
     render () {
         return (
-            <div className = "container">
+            <div className = "container register-screen">
                 <div className = "row login-row">
                     <div className = "offset-md-4 col-md-4 login-container">
                     <h2 className="login-title">Register with us</h2>

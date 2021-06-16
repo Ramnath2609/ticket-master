@@ -45,8 +45,19 @@ label {
     color: white;
 }
 
+.home {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5rem;
+}
+
 .home-image {
-    text-align: center;
+    flex: 1;
+}
+
+.home-text {
+    flex: 1;
 }
 
 .nav-links {
@@ -58,6 +69,20 @@ label {
 .nav-item{
     padding: 5px;
     transition: 0.2s ease-in;
+    margin-right: 10px;
+    border: 1px solid #fff;
+    border-radius: 5px;
+}
+
+.nav-item:hover > .nav-links{
+    color: #0062cc;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.nav-item:hover {
+    background-color: white;
+    border-radius: 5px;
 }
 
 .navbar {
@@ -110,16 +135,6 @@ input[type=checkbox]{
     box-shadow: 0px 2px 9px #0062cc;
 }
 
-.nav-item:hover > .nav-links{
-    color: #0062cc;
-    text-decoration: none;
-    cursor: pointer;
-}
-
-.nav-item:hover {
-    background-color: white;
-    border-radius: 5px;
-}
 .mr-auto {
     margin-left: auto !important;
     margin-right: 0 !important;
@@ -128,6 +143,11 @@ input[type=checkbox]{
 /* .container {
     height: 100vh;
 } */
+
+.login-screen, .register-screen {
+    height: 100vh;
+    margin: auto;
+}
 
 .login-title {
     text-align: center;
