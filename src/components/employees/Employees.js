@@ -48,7 +48,6 @@ class EmployeeList extends React.Component {
     }
 
     handleSubmit = (formData) => {
-            //console.log(formData)
          axios.post("/employees", formData, {
             headers : {
                 "x-auth" : localStorage.getItem("authToken")
@@ -63,7 +62,6 @@ class EmployeeList extends React.Component {
                   )
                 this.setState({ show: false })
                 window.location.reload()
-                //this.props.history.push("/employees")
         }
         })
         .catch(err => {
@@ -91,7 +89,7 @@ class EmployeeList extends React.Component {
                         if (response.data._id) {
                             this.setState(prevState => {
                                 return {
-                                    employees : prevState.employees.filter(empl => empl._id != response.data._id)
+                                    employees : prevState.employees.filter(empl => empl._id !== response.data._id)
                                 }
                             })
                             Swal.fire(

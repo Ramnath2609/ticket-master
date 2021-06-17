@@ -169,27 +169,28 @@ class TicketsList extends React.Component {
             <div className = "container">
                 <h2 className="title-text">Tickets</h2>
                 <div className="row">
-                { this.state.tickets.length !== 0 &&  
-                    <Tables tickets={this.state.tickets} handleClick={this.handleClick} handleResolve={this.handleResolve}/> 
-                }
-                <div className="btn-container">
-                    <Button color="primary" className="submit-btn">
-                        <Link to = "/tickets/new">Add ticket</Link>
-                    </Button>
+                    { this.state.tickets.length !== 0 &&  
+                        <Tables tickets={this.state.tickets} handleClick={this.handleClick} handleResolve={this.handleResolve}/> 
+                    }
+                    <div className="btn-container">
+                        <Button color="primary" className="submit-btn">
+                            <Link to = "/tickets/new">Add ticket</Link>
+                        </Button>
+                    </div>
                 </div>
-                </div>
+                <div className="row">
                 { this.state.tickets.length !== 0 && 
-                    <>
+                    <div className="col-6">
                         <h2 className="title-text">Statistics</h2>
                         <div className="row">
                             <div className="col-12">
                                 {this.state.tickets.length > 0 && <TicketChart data={this.state.data}/>}
                             </div>
                         </div>
-                    </>   
+                    </div>   
                 }
                 { this.state.resolvedTickets.length !== 0 && 
-                    <div className="progress-container">
+                    <div className="progress-container col-6">
                         <h2 className="title-text">Progress</h2>
                         <div className="progress">
                             <div 
@@ -205,6 +206,7 @@ class TicketsList extends React.Component {
                         </div>
                     </div>
                 }
+                </div>
             </div>
         )
     }
