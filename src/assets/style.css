@@ -28,6 +28,10 @@ label {
     text-transform: capitalize;
 }
 
+.list-group-item {
+    margin-bottom: 1rem;
+}
+
 .btn-container {
     text-align: center;
     margin: auto;

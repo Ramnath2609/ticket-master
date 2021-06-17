@@ -63,8 +63,7 @@ class CustomerList extends  React.Component {
                 })
                
             }
-        })
-       
+        }) 
     }
 
     render () {

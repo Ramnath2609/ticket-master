@@ -1,3 +1,4 @@
+import { Button } from 'reactstrap'
 import React from 'react'
 import { Link } from 'react-router-dom'
 
@@ -47,19 +48,25 @@ class Tables extends React.Component {
                                                         Show
                                                     </Link></li>
                                                 <li className="remove-btn">
-                                                    <Link  to ="/tickets" onClick={ () => {this.handleClick(ticket._id)}}>
+                                                    <Link to="/tickets" onClick={() => {this.handleClick(ticket._id)}}>
                                                         Remove
                                                     </Link>
                                                 </li>
                                             </ul>
                                         </td>
                                         <td>
-                                            <input 
-                                                type='checkbox' 
-                                                checked={ticket.isResolved} 
-                                                onChange={()=>{this.handleResolve(ticket)}}
-                                            />
+                                            {ticket.isResolved ? (
+                                                "Completed"
+                                            ) : (
+                                                <label>
+                                                    <input 
+                                                        type='checkbox' 
+                                                        checked={ticket.isResolved} 
+                                                        onChange={()=>{this.handleResolve(ticket)}}
+                                                    /> 
                                                 Mark as complete
+                                                </label>
+                                            )}
                                         </td>
                                     </tr>
                             })

@@ -5,6 +5,8 @@ import Tables from './Tables'
 import TicketChart from "./Chart"
 import {chartColors} from "./colors"
 import { Button } from "reactstrap";
+import Swal from 'sweetalert2'
+
 class TicketsList extends React.Component {
     constructor () {
         super ()
@@ -48,7 +50,6 @@ class TicketsList extends React.Component {
                     })
                 })
                 let chartData = [resolvedTickets.length, tickets.length - resolvedTickets.length];
-                console.log(chartData)
                 this.setState({ 
                     tickets, 
                     employees, 
@@ -77,13 +78,26 @@ class TicketsList extends React.Component {
                 const ticket = response.data
                 this.setState(prevState => {
                     const updatedTickets = prevState.tickets.map(tick => {
-                        if(tick._id == ticket._id){
+                        if(tick._id === ticket._id){
                             tick.isResolved = true;
                         }
                         return tick;
                     })
+                    const resolvedTickets = [...prevState.resolvedTickets, ticket]
+                    const chartData = [resolvedTickets.length, prevState.tickets.length - resolvedTickets.length];
                     return {
-                        tickets: updatedTickets
+                        tickets: updatedTickets,
+                        resolvedTickets,
+                        data: { 
+                            labels: ["Resolved", "Not resolved"],
+                            datasets: [
+                                {
+                                    data: chartData,
+                                    backgroundColor: chartColors,
+                                    hoverBackgroundColor: chartColors
+                                }
+                            ]
+                        } 
                     }
                 })
             })
@@ -91,18 +105,58 @@ class TicketsList extends React.Component {
     
 
     handleClick = (id) => {
-        axios.delete(`/tickets/${id}`)
-            .then(response => {
-                if (response.data._id) {
-                    this.setState(prevState => {
-                        return {
-                            tickets : prevState.tickets.filter(ticket => ticket._id !== response.data._id)
-                        }
-                    })
-                } else {
-                    alert (response.data.message)
-                }
-            })
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.value) {
+                axios.delete(`/tickets/${id}`, {
+                    headers : {
+                        "x-auth" : localStorage.getItem("authToken")
+                    }
+                })
+                .then (response => {
+                    if (response.data._id) {
+                        this.setState(prevState => {
+                            const tickets = prevState.tickets.filter(ticket => ticket._id !== response.data._id); 
+                            const resolvedTickets = tickets.filter(ticket => ticket.isResolved);
+                            const chartData = [resolvedTickets.length, tickets.length - resolvedTickets.length];
+                            return {
+                                tickets,
+                                resolvedTickets,
+                                data: { 
+                                    labels: ["Resolved", "Not resolved"],
+                                    datasets: [
+                                        {
+                                            data: chartData,
+                                            backgroundColor: chartColors,
+                                            hoverBackgroundColor: chartColors
+                                        }
+                                    ]
+                                }
+                            }
+                        })
+                        Swal.fire(
+                            'Deleted!',
+                            'Your ticket has been deleted.',
+                            'success'
+                        )
+                    } else {
+                        Swal.fire(
+                            'Oops!',
+                            'Something went wrong',
+                            'error'
+                        )
+                    }
+                })
+               
+            }
+        }) 
     }
 
     render () {
@@ -146,7 +200,7 @@ class TicketsList extends React.Component {
                                 aria-valuemax={this.state.tickets.length} 
                                 style={{width:`${resolved}%`}}
                             >
-                                {`${(100 - resolved).toFixed(1)}% complete`}
+                                {`${(resolved).toFixed(1)}% complete`}
                             </div>
                         </div>
                     </div>
