@@ -6,7 +6,12 @@ body {
     background-color: #0984e3;
     border-width: 0;
     border-radius: 20px;
-    padding: 7px 15px;
+    padding: 7px 25px;
+}
+
+.title-text {
+    text-align: center;
+    margin: 2rem 0;
 }
 
 .form-control {
@@ -23,8 +28,18 @@ label {
     text-transform: capitalize;
 }
 
+.btn-container {
+    text-align: center;
+    margin: auto;
+}
+
 .submit-btn {
     text-align: center;
+}
+
+.submit-btn > a {
+    text-decoration: none;
+    color: #fff;
 }
 
 .select-option {
@@ -183,4 +198,14 @@ thead, td {
     border: 1px solid #b2bec3;
     box-shadow: 0px 2px 9px;
     border-radius: 10px;
+}
+
+.progress {
+    background-color: #fff;
+    height: 1.5rem;
+    border-radius: 1.25rem;
+}
+
+.progress-container {
+    margin: 2rem 0;
 }

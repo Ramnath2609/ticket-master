@@ -106,11 +106,27 @@ class Departments extends React.Component {
             <div className="container">
                 <div className = "row">
                     <div className = "col-md-6">
-                    <h2>Departments - { this.state.departments.length }</h2>
+                    <h2 className="title-text">Departments - { this.state.departments.length }</h2>
                         <ListGroup className="list-group">
                             {
                                 this.state.departments.map(dept => {
-                                    return <ListGroupItem className ="list-group-item" key = { dept._id }>{ dept.name } <Link className = "float-right" to ={`/departments/${ dept._id }`} >    Show</Link><Link className = "float-right" to = "/departments"  onClick = {() => { this.handleRemove(dept)} }>Remove    |</Link></ListGroupItem>
+                                    return (
+                                        <ListGroupItem className ="list-group-item" key = { dept._id }>
+                                            { dept.name } 
+                                            <ul className="action-btns float-right">
+                                                <li className="show-btn">
+                                                    <Link to ={`/departments/${ dept._id }`}>
+                                                        Show
+                                                    </Link>
+                                                </li>
+                                                <li className="remove-btn">
+                                                    <Link to = "/departments"  onClick = {() => { this.handleRemove(dept)} }>
+                                                        Remove
+                                                    </Link>                                                    
+                                                </li>
+                                            </ul>
+                                        </ListGroupItem>
+                                    ) 
                                 })
                             }
                         </ListGroup>

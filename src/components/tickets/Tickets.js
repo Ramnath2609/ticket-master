@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import Tables from './Tables'
 import TicketChart from "./Chart"
 import {chartColors} from "./colors"
+import { Button } from "reactstrap";
 class TicketsList extends React.Component {
     constructor () {
         super ()
@@ -15,14 +16,14 @@ class TicketsList extends React.Component {
             departments : [],
             data: {
                 labels: ["Resolved", "Not resolved"],
-                    datasets: [
-                        {
-                        data: [300, 50],
-                        backgroundColor: chartColors,
-                        hoverBackgroundColor: chartColors
-   
-                    }]
-        }
+                datasets: [
+                    {
+                    data: [1, 1],
+                    backgroundColor: chartColors,
+                    hoverBackgroundColor: chartColors
+                    }
+                ]
+            }
     }
 }
 
@@ -46,19 +47,43 @@ class TicketsList extends React.Component {
                         return employee
                     })
                 })
-
-                this.setState({ tickets, employees, customers, departments, resolvedTickets })
+                let chartData = [resolvedTickets.length, tickets.length - resolvedTickets.length];
+                console.log(chartData)
+                this.setState({ 
+                    tickets, 
+                    employees, 
+                    customers, 
+                    departments, 
+                    resolvedTickets,
+                    data: { 
+                        labels: ["Resolved", "Not resolved"],
+                        datasets: [
+                            {
+                                data: chartData,
+                                backgroundColor: chartColors,
+                                hoverBackgroundColor: chartColors
+                            }
+                        ]
+                    } 
+                })
             })
     }
 
     handleResolve = (ticket) => {
-        axios.delete(`/tickets/${ticket._id}`)
+        axios.put(`/tickets/${ticket._id}`, {
+            isResolved: true
+        })
             .then(response => {
-                const tickets = response.data
+                const ticket = response.data
                 this.setState(prevState => {
-                    const resolvedTickets = prevState.resolvedTickets.push(ticket)
+                    const updatedTickets = prevState.tickets.map(tick => {
+                        if(tick._id == ticket._id){
+                            tick.isResolved = true;
+                        }
+                        return tick;
+                    })
                     return {
-                        tickets, resolvedTickets
+                        tickets: updatedTickets
                     }
                 })
             })
@@ -81,34 +106,50 @@ class TicketsList extends React.Component {
     }
 
     render () {
-        console.log('within tickets render', this.state.tickets.length)
         let resolved
         if(this.state.tickets.length !==0) {
              resolved = (100 / this.state.tickets.length) * this.state.resolvedTickets.length
         }
-        
-        //console.log(resolved)
+                
         return (
             <div className = "container">
+                <h2 className="title-text">Tickets</h2>
                 <div className="row">
-                <h2>Tickets</h2>
-                { this.state.tickets.length !== 0 &&  <Tables tickets = { this.state.tickets } handleClick = { this.handleClick } handleResolve = { this.handleResolve }/> }
-                <Link to = "/tickets/new">Add ticket</Link>
+                { this.state.tickets.length !== 0 &&  
+                    <Tables tickets={this.state.tickets} handleClick={this.handleClick} handleResolve={this.handleResolve}/> 
+                }
+                <div className="btn-container">
+                    <Button color="primary" className="submit-btn">
+                        <Link to = "/tickets/new">Add ticket</Link>
+                    </Button>
                 </div>
-                
-                <div className="row">
-                    <h2>Statistics</h2>
-                    <div className="col-8">
-                        {this.state.tickets.length > 0 && <TicketChart data={this.state.data}/>}
+                </div>
+                { this.state.tickets.length !== 0 && 
+                    <>
+                        <h2 className="title-text">Statistics</h2>
+                        <div className="row">
+                            <div className="col-12">
+                                {this.state.tickets.length > 0 && <TicketChart data={this.state.data}/>}
+                            </div>
+                        </div>
+                    </>   
+                }
+                { this.state.resolvedTickets.length !== 0 && 
+                    <div className="progress-container">
+                        <h2 className="title-text">Progress</h2>
+                        <div className="progress">
+                            <div 
+                                className="progress-bar progress-bar-success" 
+                                role="progressbar" 
+                                aria-valuenow={this.state.resolvedTickets.length}
+                                aria-valuemin="0" 
+                                aria-valuemax={this.state.tickets.length} 
+                                style={{width:`${resolved}%`}}
+                            >
+                                {`${(100 - resolved).toFixed(1)}% complete`}
+                            </div>
+                        </div>
                     </div>
-                </div>
-                { this.state.resolvedTickets.length !== 0 &&
-                <div className="progress">
-                    <div className="progress-bar progress-bar-success" role="progressbar" aria-valuenow='3'
-                    aria-valuemin="0" aria-valuemax={ this.state.tickets.length } style={{width : `${resolved}%`}}>
-                        {`${100 - resolved}% complete`}
-                    </div>
-                </div>
                 }
             </div>
         )

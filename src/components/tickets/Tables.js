@@ -42,10 +42,25 @@ class Tables extends React.Component {
                                         <td>{ ticket.priority }</td>
                                         <td>
                                             <ul className="action-btns">
-                                                <li className="show-btn"><Link  to ={`/tickets/${ ticket._id }`}>Show </Link></li>
-                                                <li className="remove-btn"><Link  to ="/tickets" onClick={ () => {this.handleClick(ticket._id)}}> Remove</Link></li>
-                                            </ul></td>
-                                        <td><input type='checkbox' checked={ticket.isResolved} onChange={() => {this.handleResolve(ticket)}}/>completed </td>
+                                                <li className="show-btn">
+                                                    <Link  to ={`/tickets/${ ticket._id }`}>
+                                                        Show
+                                                    </Link></li>
+                                                <li className="remove-btn">
+                                                    <Link  to ="/tickets" onClick={ () => {this.handleClick(ticket._id)}}>
+                                                        Remove
+                                                    </Link>
+                                                </li>
+                                            </ul>
+                                        </td>
+                                        <td>
+                                            <input 
+                                                type='checkbox' 
+                                                checked={ticket.isResolved} 
+                                                onChange={()=>{this.handleResolve(ticket)}}
+                                            />
+                                                Mark as complete
+                                        </td>
                                     </tr>
                             })
                         }

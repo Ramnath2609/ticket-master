@@ -73,15 +73,33 @@ class CustomerList extends  React.Component {
             <div className = "container">
                 <div className = "row">
                     <div className = "offset-md-2 col-md-6">
-                    <h2>Listing customers - { customers.length }</h2>
+                    <h2 className="title-text">Customers - { customers.length }</h2>
                         <ListGroup>
                             {
                                 customers.map(cust => {
-                                    return <ListGroupItem key = { cust._id }>{ cust.name } - { cust.email } - { cust.mobile } <Link className = "float-right" to = {`/customers/${cust._id}`}>Show</Link><Button color = "danger" size = "sm" className = "float-right" onClick = {() => {this.handleClick(cust._id)}}>Remove</Button></ListGroupItem>
+                                    return (
+                                        <ListGroupItem key = { cust._id }>
+                                            { cust.name } - { cust.email } - { cust.mobile } 
+                                            <ul className="action-btns">
+                                                <li className="show-btn">
+                                                    <Link to = {`/customers/${cust._id}`}>
+                                                        Show
+                                                    </Link>
+                                                </li>
+                                                <li className="remove-btn">
+                                                    <Link to ="/employees" onClick = {() => {this.handleClick(cust._id)}}>  Remove</Link>
+                                                </li>
+                                            </ul>
+                                        </ListGroupItem>
+                                    ) 
                                 })
                             }
                         </ListGroup>
-                    <Link to = "/customers/new">Add a customer</Link>
+                        <div className="btn-container mt-2">
+                            <Button color="primary" className="submit-btn">
+                                <Link to="/customers/new">Add a customer</Link>
+                            </Button>
+                        </div>
                     </div>
                 </div>
             </div>

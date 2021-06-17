@@ -116,7 +116,7 @@ class EmployeeList extends React.Component {
     render () {
         return (
             <div className = "container">
-                <h2>Listing employees</h2>
+                <h2 className="title-text">Employees</h2>
                 <Table employees = { this.state.employees } handleRemove = { this.handleRemove }/>
                 <div className="add-btn">
                     <Button onClick={() => this.openModal()}>Add a new employee</Button>
